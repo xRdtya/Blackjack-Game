@@ -177,7 +177,7 @@ class Play:
         if self.enemy_hp <= 0:
             self.playing = False
             self.redraw_game_window()
-            alert("GAME OVER!\nMUSUH TELAH MATI", TEXT_RED)
+            alert("SELAMAT!\nMUSUH TELAH MATI", TEXT_RED)
             time.sleep(3)
             self.reset_game() 
             return
@@ -345,4 +345,5 @@ while running:
 pygame.quit()
 
 quit()
+
 
