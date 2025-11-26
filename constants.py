@@ -1,31 +1,53 @@
-import pygame as pygame
+import pygame
 
-display_width = 900
+pygame.init()
+
+# --- UKURAN LAYAR ---
+display_width = 1000
 display_height = 700
 
-background_color = (34,139,34)
-grey = (220,220,220)
-black = (0,0,0)
-green = (0, 200, 0)
-red = (255,0,0)
-light_red = (200, 0, 0)
-light_slat = (119,136,153)
-dark_slat = (47, 79, 79)
-dark_red = (255, 0, 0)
-gold = (255, 215, 0)
+# --- WARNA DASAR (FIX ERROR) ---
 white = (255, 255, 255)
-pygame.init()
-font = pygame.font.SysFont("Arial", 20)
-textfont = pygame.font.SysFont('Comic Sans MS', 25)
-game_end = pygame.font.SysFont('dejavusans', 100)
-blackjack = pygame.font.SysFont('roboto', 70)
+black = (0, 0, 0)
+grey = (220, 220, 220)
 
+# --- PALET WARNA (CASINO THEME) ---
+# Background Meja (Emerald Green)
+TABLE_COLOR = (39, 119, 88) 
+# Warna Pinggiran Meja (Coklat Gelap)
+BORDER_COLOR = (86, 54, 53)
 
+# Sidebar (Charcoal Blue)
+SIDEBAR_COLOR = (44, 62, 80)
+
+# Teks
+TEXT_COLOR = (236, 240, 241) # Putih tulang
+TEXT_GOLD = (241, 196, 15)   # Emas
+TEXT_RED = (231, 76, 60)     # Merah soft
+
+# Tombol
+BTN_MAIN_COLOR = (52, 152, 219) # Biru
+BTN_MAIN_HOVER = (41, 128, 185)
+
+BTN_ACTION_COLOR = (46, 204, 113) # Hijau
+BTN_ACTION_HOVER = (39, 174, 96)
+
+BTN_STOP_COLOR = (230, 126, 34)   # Oranye
+BTN_STOP_HOVER = (211, 84, 0)
+
+BTN_EXIT_COLOR = (192, 57, 43)    # Merah bata
+BTN_EXIT_HOVER = (150, 40, 40)
+
+# Kartu
+CARD_SLOT_COLOR = (30, 90, 65) 
+
+# --- FONTS ---
+font_ui = pygame.font.SysFont('verdana', 20, bold=True) 
+font_card = pygame.font.SysFont('georgia', 24, bold=True)
+font_result = pygame.font.SysFont('impact', 60)
+
+# --- LAIN-LAIN ---
 SUITS = ['C', 'S', 'H', 'D']
 RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 
 CARD_SIZE = (72, 96)
-CARD_CENTER = (36, 48)
-CARD_BACK_SIZE = (72, 96)
-CARD_BACK_CENTER = (36, 48)
-
