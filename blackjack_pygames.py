@@ -285,7 +285,7 @@ class Play:
              # FORMAT YANG KAMU MINTA:
              # Baris 1: MUSUH
              # Baris 2: BUST! MENANG!
-             msg = "MUSUH\nBUST! MENANG!" 
+             msg = "MUSUH BUST!\n MENANG!" 
              col = TEXT_GOLD
              self.enemy_hp -= self.player.value
              self.hp += self.player.value
@@ -357,3 +357,4 @@ while running:
 pygame.quit()
 
 quit()
+
