@@ -248,7 +248,7 @@ class Play:
         color = TEXT_COLOR
 
         if self.player.value == 21 and self.dealer.value == 21:
-            msg = "PUSH\n(SERI)"
+            msg = "SERI"
             self.hp += self.player.value * 2
             finish = True
         elif self.player.value == 21:
@@ -300,7 +300,7 @@ class Play:
             self.enemy_hp += self.player.value
             self.hp -= self.player.value
         else:
-            msg = "PUSH\n(SERI)"
+            msg = "SERI"
             col = TEXT_COLOR
             self.hp += 10
 
@@ -355,4 +355,5 @@ while running:
     clock.tick(60)
 
 pygame.quit()
+
 quit()
