@@ -19,6 +19,9 @@ font = pygame.font.SysFont("Arial", 20)
 textfont = pygame.font.SysFont('Comic Sans MS', 25)
 game_end = pygame.font.SysFont('dejavusans', 100)
 blackjack = pygame.font.SysFont('roboto', 70)
+font_result = pygame.font.SysFont('impact', 50)
+font_ui = pygame.font.SysFont('arial', 20, bold=True)
+font_card_text = pygame.font.SysFont('timesnewroman', 25, bold=True) 
 
 
 SUITS = ['C', 'S', 'H', 'D']
