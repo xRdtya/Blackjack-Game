@@ -190,7 +190,7 @@ class Play:
         self.dealer.calc_hand()
         
         self.redraw_game_window()
-        self.check_blackjack()
+        #self.check_blackjack()
 
     def hit(self):
         if not self.playing: return
@@ -233,35 +233,6 @@ class Play:
         
         self.result()
 
-    def check_blackjack(self):
-        finish = False
-        msg = ""
-        color = TEXT_COLOR
-
-        if self.player.value == 21 and self.dealer.value == 21:
-            msg = "SERI"
-            self.hp += self.player.value * 2
-            finish = True
-        elif self.player.value == 21:
-            msg = "BLACKJACK!\nKAMU MENANG!"
-            color = TEXT_GOLD
-            self.enemy_hp -= int(self.player.value * 2)
-            self.hp += self.player.value
-            finish = True
-        elif self.dealer.value == 21:
-            msg = "MUSUH BLACKJACK!\nKAMU KALAH"
-            color = TEXT_RED
-            self.hp -= int(self.player.value * 2)
-            self.enemy_hp += self.player.value
-            finish = True
-
-        if finish:
-            self.playing = False
-            self.redraw_game_window(show_dealer_all=True)
-            alert(msg, color)
-            time.sleep(3)
-            self.play_or_exit()
-
     def result(self):
         msg = ""
         col = TEXT_COLOR
@@ -290,11 +261,27 @@ class Play:
             msg = "SERI"
             col = TEXT_COLOR
             self.hp += 10
+        if self.player.value == 21 and self.dealer.value == 21:
+            msg = "SERI"
+            self.hp += self.player.value * 2
+            finish = True
+        elif self.player.value == 21:
+            msg = "BLACKJACK!\nKAMU MENANG!"
+            color = TEXT_GOLD
+            self.enemy_hp -= int(self.player.value * 2)
+            self.hp += self.player.value
+            finish = True
+        elif self.dealer.value == 21:
+            msg = "MUSUH BLACKJACK!\nKAMU KALAH"
+            color = TEXT_RED
+            self.hp -= int(self.player.value * 2)
+            self.enemy_hp += self.player.value
+            finish = True
 
         alert(msg, col)   
         time.sleep(3)
         self.play_or_exit()
-    
+
     def exit(self):
         sys.exit()
     
@@ -345,5 +332,3 @@ while running:
 pygame.quit()
 
 quit()
-
-
