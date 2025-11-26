@@ -36,7 +36,7 @@ def game_texts(text, x, y, color, font_type=font_ui):
     TextRect.center = (x, y)
     gameDisplay.blit(TextSurf, TextRect)
 
-def newGame(msg, color):
+def alert(msg, color):
     s = pygame.Surface((display_width, display_height))
     s.set_alpha(150)
     s.fill((0,0,0))
@@ -169,7 +169,7 @@ class Play:
         if self.hp <= 0:
             self.playing = False
             self.redraw_game_window()
-            newGame("GAME OVER!\nKAMU TELAH MATI", TEXT_RED)
+            alert("GAME OVER!\nKAMU TELAH MATI", TEXT_RED)
             time.sleep(3)
             self.reset_game() 
             return
@@ -177,7 +177,7 @@ class Play:
         if self.enemy_hp <= 0:
             self.playing = False
             self.redraw_game_window()
-            newGame("GAME OVER!\nMUSUH TELAH MATI", TEXT_RED)
+            alert("GAME OVER!\nMUSUH TELAH MATI", TEXT_RED)
             time.sleep(3)
             self.reset_game() 
             return
@@ -195,16 +195,9 @@ class Play:
     def hit(self):
         if not self.playing: return
 
-        if len(self.player.card_img) >= 5:
-            pygame.draw.rect(gameDisplay, TABLE_COLOR, (CENTER_X_AREA - 200, 330, 400, 40))
-            game_texts("Maksimal 5 Kartu!", CENTER_X_AREA, 350, TEXT_RED)
-            pygame.display.update()
-            time.sleep(0.5)
-            self.redraw_game_window()
-            return
-
         self.player.add_card(self.deck.deal())
         self.player.calc_hand()
+
         self.redraw_game_window()
 
         if self.player.value > 21:
@@ -212,6 +205,18 @@ class Play:
             self.redraw_game_window(show_dealer_all=True)
             time.sleep(1)
             self.result()
+
+        if len(self.player.card_img) >= 5 and self.player.value < 22:
+            self.playing = False
+            self.redraw_game_window(show_dealer_all=True)
+
+            alert("5 KARTU SAKTI\nKAMU MENANG!", TEXT_GOLD)
+            self.enemy_hp -= self.player.value
+            self.hp += self.player.value
+            
+            time.sleep(3)
+            self.play_or_exit()
+
             
     def stand(self):
         if not self.playing: return
@@ -253,7 +258,7 @@ class Play:
         if finish:
             self.playing = False
             self.redraw_game_window(show_dealer_all=True)
-            newGame(msg, color)
+            alert(msg, color)
             time.sleep(3)
             self.play_or_exit()
 
@@ -286,7 +291,7 @@ class Play:
             col = TEXT_COLOR
             self.hp += 10
 
-        newGame(msg, col)   
+        alert(msg, col)   
         time.sleep(3)
         self.play_or_exit()
     
