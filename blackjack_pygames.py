@@ -130,7 +130,7 @@ class Play:
         start_player_x = get_start_x(player_slots)
 
         for i in range(player_slots):
-             pygame.draw.rect(gameDisplay, CARD_SLOT_COLOR, (start_player_x + (i * CARD_GAP), player_y, NEW_CARD_W, NEW_CARD_H), border_radius=5)
+            pygame.draw.rect(gameDisplay, CARD_SLOT_COLOR, (start_player_x + (i * CARD_GAP), player_y, NEW_CARD_W, NEW_CARD_H), border_radius=5)
 
         #Skor Player
         game_texts(f"Kartu mu: {self.player.value}", CENTER_X_AREA, 530, TEXT_GOLD, font_card_val)
@@ -145,11 +145,12 @@ class Play:
         pygame.display.update()
 
     def display_stats(self):
+        # Limitasi nyawa
         if self.hp > 100:
             self.hp = 100
         elif self.hp < 0:
             self.hp = 0
-        if self.enemy_hp > 100:
+        elif self.enemy_hp > 100:
             self.enemy_hp = 100
         elif self.enemy_hp < 0:
             self.enemy_hp = 0
@@ -205,7 +206,13 @@ class Play:
             self.redraw_game_window(show_dealer_all=True)
             time.sleep(1)
             self.result()
+        elif self.player.value == 21:
+            self.playing = False
+            self.redraw_game_window(show_dealer_all=True)
+            time.sleep(1)
+            self.check_blackjack()
 
+        # 5 Card rule
         if len(self.player.card_img) >= 5 and self.player.value < 22:
             self.playing = False
             self.redraw_game_window(show_dealer_all=True)
@@ -261,22 +268,6 @@ class Play:
             msg = "SERI"
             col = TEXT_COLOR
             self.hp += 10
-        if self.player.value == 21 and self.dealer.value == 21:
-            msg = "SERI"
-            self.hp += self.player.value * 2
-            finish = True
-        elif self.player.value == 21:
-            msg = "BLACKJACK!\nKAMU MENANG!"
-            color = TEXT_GOLD
-            self.enemy_hp -= int(self.player.value * 2)
-            self.hp += self.player.value
-            finish = True
-        elif self.dealer.value == 21:
-            msg = "MUSUH BLACKJACK!\nKAMU KALAH"
-            color = TEXT_RED
-            self.hp -= int(self.player.value * 2)
-            self.enemy_hp += self.player.value
-            finish = True
 
         alert(msg, col)   
         time.sleep(3)
@@ -289,7 +280,8 @@ class Play:
 
         if self.player.value == 21 and self.dealer.value == 21:
             msg = "SERI"
-            self.hp += self.player.value * 2
+            self.hp += self.player.value
+            self.enemy_hp += self.dealer.value
             finish = True
         elif self.player.value == 21:
             msg = "BLACKJACK!\nKAMU MENANG!"
@@ -300,8 +292,8 @@ class Play:
         elif self.dealer.value == 21:
             msg = "MUSUH BLACKJACK!\nKAMU KALAH"
             color = TEXT_RED
-            self.hp -= int(self.player.value * 2)
-            self.enemy_hp += self.player.value
+            self.hp -= int(self.dealer.value * 2)
+            self.enemy_hp += self.dealer.value
             finish = True
 
         if finish:
