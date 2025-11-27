@@ -201,16 +201,11 @@ class Play:
 
         self.redraw_game_window()
 
-        if self.player.value > 21:
+        if self.player.value > 21 or self.player.value == 21:
             self.playing = False 
             self.redraw_game_window(show_dealer_all=True)
             time.sleep(1)
             self.result()
-        elif self.player.value == 21:
-            self.playing = False
-            self.redraw_game_window(show_dealer_all=True)
-            time.sleep(1)
-            self.check_blackjack()
 
         # 5 Card rule
         if len(self.player.card_img) >= 5 and self.player.value < 22:
