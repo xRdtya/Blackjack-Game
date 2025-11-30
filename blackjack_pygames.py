@@ -262,7 +262,6 @@ class Play:
         else:
             msg = "SERI"
             col = TEXT_COLOR
-            self.hp += 10
 
         alert(msg, col)   
         time.sleep(3)
