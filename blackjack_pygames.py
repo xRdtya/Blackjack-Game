@@ -242,13 +242,13 @@ class Play:
         if self.player.value > 21:
             msg = "KAMU BUST!\nKALAH!"
             col = TEXT_RED
-            self.enemy_hp += 10 
-            self.hp -= 10
+            self.enemy_hp += self.player.value 
+            self.hp -= self.player.value
         elif self.dealer.value > 21:
             msg = "MUSUH BUST!\n MENANG!" 
             col = TEXT_GOLD
-            self.enemy_hp -= self.player.value
-            self.hp += self.player.value
+            self.enemy_hp -= self.dealer.value
+            self.hp += self.dealer.value
         elif self.player.value > self.dealer.value:
             msg = "KAMU\nMENANG!"
             col = TEXT_GOLD
@@ -257,8 +257,8 @@ class Play:
         elif self.player.value < self.dealer.value:
             msg = "MUSUH\nMENANG!"
             col = TEXT_RED
-            self.enemy_hp += self.player.value
-            self.hp -= self.player.value
+            self.enemy_hp += self.dealer.value
+            self.hp -= self.dealer.value
         else:
             msg = "SERI"
             col = TEXT_COLOR
@@ -348,4 +348,3 @@ while running:
 pygame.quit()
 
 quit()
-
